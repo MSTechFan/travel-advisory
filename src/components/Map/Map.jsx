@@ -6,11 +6,11 @@ import Rating from '@mui/lab'
 
 import useStyles from './styles'
 
-const Map = () => {
+const Map = ({setCoordinates, setBounds, coordinates}) => {
   const classes = useStyles()
   const isMobile = useMediaQuery('(min-width:600px)')
 
-  const coordinates = {lat:0, lng:0}
+  
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
@@ -21,7 +21,10 @@ const Map = () => {
         margin={[50, 50, 50, 50]}
         options={''}
         onChange={''}
-        onChildClick={''}
+        onChildClick={(event) => {
+          console.log(event)
+          setCoordinates({lat: event.center.lat, lng: event.center.lng})
+        }}
         >
 
       </GoogleMapReact>

@@ -20,11 +20,13 @@ const Map = ({setCoordinates, setBounds, coordinates}) => {
         defaultZoom={14}
         margin={[50, 50, 50, 50]}
         options={''}
-        onChange={''}
-        onChildClick={(event) => {
+        onChange={(event) => {
           console.log(event)
           setCoordinates({lat: event.center.lat, lng: event.center.lng})
+          setBounds({ne: event.marginBounds.ne, sw: event.marginBounds.sw})
         }}
+        onChildClick={''}
+        
         >
 
       </GoogleMapReact>

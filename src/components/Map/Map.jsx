@@ -2,13 +2,13 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react'
 import { Paper, Typography, useMediaQuery } from '@mui/material'
 import LocationOnOutlined from '@mui/icons-material/LocationOnOutlined'
-import Rating from '@mui/lab'
+import Rating from '@mui/lab/Rating'
 
 import useStyles from './styles'
 
 const Map = ({setCoordinates, setBounds, coordinates, places}) => {
   const classes = useStyles()
-  const isMobile = useMediaQuery('(min-width:600px)')
+  const isDesktop = useMediaQuery('(min-width:600px)')
 
   
   return (
@@ -25,7 +25,7 @@ const Map = ({setCoordinates, setBounds, coordinates, places}) => {
           setCoordinates({lat: event.center.lat, lng: event.center.lng})
           setBounds({ne: event.marginBounds.ne, sw: event.marginBounds.sw})
         }}
-        onChildClick={''}        
+        onChildClick={(child) => {}}        
       >
       {places?.map((place, i) => (
         <div 
@@ -35,7 +35,7 @@ const Map = ({setCoordinates, setBounds, coordinates, places}) => {
           key={i}
         >
           {
-            isMobile ? (
+            !isDesktop ? (
               <LocationOnOutlined color="primary" fontSize="large" />
             ) : (
               <Paper eleveation={3} className={classes.paper}>
@@ -47,6 +47,7 @@ const Map = ({setCoordinates, setBounds, coordinates, places}) => {
                   src={place.photo ? place.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
                   alt={place.name}
                 />
+                <Rating size="small" value={Number(place.rating)} readOnly/>
               </Paper>
             )
           }

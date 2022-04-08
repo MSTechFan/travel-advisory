@@ -6,7 +6,7 @@ import Rating from '@mui/lab/Rating'
 
 import useStyles from './styles'
 
-const Map = ({setCoordinates, setBounds, coordinates, places}) => {
+const Map = ({setCoordinates, setBounds, coordinates, places, setChildClicked}) => {
   const classes = useStyles()
   const isDesktop = useMediaQuery('(min-width:600px)')
 
@@ -25,7 +25,7 @@ const Map = ({setCoordinates, setBounds, coordinates, places}) => {
           setCoordinates({lat: event.center.lat, lng: event.center.lng})
           setBounds({ne: event.marginBounds.ne, sw: event.marginBounds.sw})
         }}
-        onChildClick={(child) => {}}        
+        onChildClick={(child) => setChildClicked(child)}        
       >
       {places?.map((place, i) => (
         <div 
